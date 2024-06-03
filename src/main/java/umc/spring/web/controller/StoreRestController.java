@@ -25,7 +25,7 @@ public class StoreRestController {
     private final StoreCommandService storeCommandService;
 
     // 특정 지역에 가게 추가하는 api
-    @PostMapping("add")
+    @PostMapping("/add")
     public ApiResponse<StoreResponseDTO.CreateStoreResultDTO> createStore(@RequestBody @Valid StoreRequestDTO.StoreDTO request) {
         Store store = storeCommandService.createStore(request);
         return ApiResponse.onSuccess(StoreConverter.toCreateStoreResultDTO(store));
@@ -47,6 +47,4 @@ public class StoreRestController {
         Mission mission = storeCommandService.createMisson(storeId, request);
         return ApiResponse.onSuccess(StoreConverter.toCreateMissionResultDTO(mission));
     }
-
-    // 미션 도전하기 api
 }
