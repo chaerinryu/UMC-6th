@@ -5,6 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
 import umc.spring.service.StoreService.StoreCommandService;
@@ -40,6 +41,12 @@ public class StoreRestController {
     }
 
     // 가게에 미션 추가하는 api
+    @PostMapping("/{storeId}/mission")
+    public ApiResponse<StoreResponseDTO.CreateMissionResultDTO> createMission(@RequestBody @Valid StoreRequestDTO.MissionDTO request,
+                                                                              @ExistStore @PathVariable(name = "storeId") Long storeId) {
+        Mission mission = storeCommandService.createMisson(storeId, request);
+        return ApiResponse.onSuccess(StoreConverter.toCreateMissionResultDTO(mission));
+    }
 
     // 미션 도전하기 api
 }
