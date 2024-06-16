@@ -2,6 +2,7 @@ package umc.spring.domain;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import umc.spring.domain.common.BaseEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Store {
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
