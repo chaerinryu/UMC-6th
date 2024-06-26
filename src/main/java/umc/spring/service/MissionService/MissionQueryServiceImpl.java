@@ -28,4 +28,9 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     public Optional<MemberMission> findMemberMission(Member member, Mission mission) {
         return memberMissionRepository.findByMemberAndMission(member, mission);
     }
+
+    @Override
+    public Optional<MemberMission> findMemberMission(Long id) {
+        return memberMissionRepository.findById(id);
+    }
 }
