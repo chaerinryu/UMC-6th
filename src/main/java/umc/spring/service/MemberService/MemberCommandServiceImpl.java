@@ -2,14 +2,18 @@ package umc.spring.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.FoodCategoryHandler;
 import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MemberPreferConverter;
 import umc.spring.domain.FoodCategory;
 import umc.spring.domain.Member;
+import umc.spring.domain.enums.MissionStatus;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.MemberPrefer;
 import umc.spring.repository.FoodCategoryRepository;
+import umc.spring.repository.MemberMissionRepository;
 import umc.spring.repository.MemberRepository;
 import umc.spring.web.dto.MemberRequestDTO;
 
@@ -22,6 +26,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     private final MemberRepository memberRepository;
     private final FoodCategoryRepository foodCategoryRepository;
+    private final MemberMissionRepository memberMissionRepository;
 
     @Override
     public Member joinMember(MemberRequestDTO.JoinDto request) {
@@ -39,4 +44,16 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
         return memberRepository.save(newMember);
     }
+
+    @Override
+    @Transactional
+    public MemberMission completeMission(Long memberMissionId) {
+
+        MemberMission memberMission = memberMissionRepository.findById(memberMissionId).get();
+
+        memberMission.setStatus(MissionStatus.COMPLETE);
+
+        return memberMission;
+    }
+
 }
