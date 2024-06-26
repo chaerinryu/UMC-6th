@@ -1,6 +1,7 @@
 package umc.spring.web.dto;
 
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 import umc.spring.validation.annotation.ExistCategories;
 
 import javax.validation.constraints.NotBlank;
@@ -27,6 +28,8 @@ public class StoreRequestDTO {
         Float score;
         @NotBlank
         String body;
+
+        MultipartFile reviewImage;
     }
 
     @Getter

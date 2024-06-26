@@ -1,10 +1,7 @@
 package umc.spring.converter;
 
 import org.springframework.data.domain.Page;
-import umc.spring.domain.Mission;
-import umc.spring.domain.Region;
-import umc.spring.domain.Review;
-import umc.spring.domain.Store;
+import umc.spring.domain.*;
 import umc.spring.web.dto.StoreRequestDTO;
 import umc.spring.web.dto.StoreResponseDTO;
 
@@ -34,6 +31,13 @@ public class StoreConverter {
                 .title(request.getTitle())
                 .score(request.getScore())
                 .body(request.getBody())
+                .build();
+    }
+
+    public static ReviewImage toReviewImage(String imageUrl, Review review){
+        return ReviewImage.builder()
+                .imageUrl(imageUrl)
+                .review(review)
                 .build();
     }
 
